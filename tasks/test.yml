@@ -1,0 +1,5 @@
+- name: test task
+  command: echo 123
+  tags:
+    - core
+    - install
