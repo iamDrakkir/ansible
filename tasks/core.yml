@@ -1,0 +1,41 @@
+- name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - install
+    - neovim
+    - core
+- name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
+  become: true
+  apt:
+    name: [ "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+  tags:
+    - install
+    - neovim
+    - core
+ 
+- name: install vlc
+  become: true
+  apt:
+    name: "vlc"
+  tags:
+    - install
+    - core
+    
+- name: install python
+  become: true
+  apt:
+    name: "python3"
+  tags:
+    - install
+    - core
+
+- name: install python-pip
+  become: true
+  apt:
+    name: "python3-pip"
+  tags:
+    - install
+    - core
+
