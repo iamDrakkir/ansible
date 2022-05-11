@@ -10,15 +10,15 @@
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
     update: yes
     accept_hostkey: yes
-    version: master
+    version: main
   tags:
     - install
     - dotfiles
     - stow
-#- name: Stow dotfiles
-#  shell: cd $HOME/.dotfiles && ./ubuntu
-#  tags:
-#    - install
-#    - dotfiles
-#    - stow
+- name: Stow dotfiles
+  shell: cd $HOME/.dotfiles && ./stow_install
+  tags:
+    - install
+    - dotfiles
+    - stow
 
