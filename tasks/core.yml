@@ -39,3 +39,11 @@
     - install
     - core
 
+- name: install ripgrep
+  become: true
+  apt:
+    name: "ripgrep"
+  tags:
+    - install
+    - core
+
