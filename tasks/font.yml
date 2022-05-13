@@ -1,0 +1,14 @@
+- name: ensure JetBrainsMono directory
+  file:
+    path: /usr/share/fonts/JetBrainsMono/
+    state: directory
+  become: true
+- name: Download JetBrainsMono
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip 
+    dest: /usr/share/fonts/JetBrainsMono/
+    remote_src: yes
+  become: true
+  tags:
+    - font
+
