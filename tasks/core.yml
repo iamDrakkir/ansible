@@ -47,3 +47,10 @@
     - install
     - core
 
+- name: install alacritty
+  become: true
+  apt:
+    name: "alacritty"
+  tags:
+    - install
+    - core

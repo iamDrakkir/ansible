@@ -1,3 +1,17 @@
+- name: Ensure .config/git directory exists
+  file:
+    dest: ~/.config/git
+    mode: 0700
+    state: directory
+  tags:
+  - git
+- name: Ensure .config/git/config exists
+  file:
+    dest: ~/.config/git/config
+    mode: u=rw,g=r,o=r
+    state: touch
+  tags:
+  - git
 - name: Git personal setup email
   git_config:
     name: user.email
