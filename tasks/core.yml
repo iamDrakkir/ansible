@@ -2,55 +2,28 @@
   become: true
   apt:
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
-  tags:
-    - install
-    - neovim
-    - core
+
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
   become: true
   apt:
     name: [ "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
-  tags:
-    - install
-    - neovim
-    - core
  
+- name: Install System Packages 3 (alacritty, tmux)
+  become: true
+  apt:
+    name: ["alacritty", "tmux"] 
+
+- name: Install System Packages 4 (ripgrep, exa, bat, fzf, zoxide, entr)
+  become: true
+  apt:
+    name: ["ripgrep", "exa", "bat", "fzf", "zoxide", "entr"]
+
+- name: install python (py3, pip)
+  become: true
+  apt:
+    name: ["python3", "python3-pip"]
+
 - name: install vlc
   become: true
   apt:
     name: "vlc"
-  tags:
-    - install
-    - core
-    
-- name: install python
-  become: true
-  apt:
-    name: "python3"
-  tags:
-    - install
-    - core
-
-- name: install python-pip
-  become: true
-  apt:
-    name: "python3-pip"
-  tags:
-    - install
-    - core
-
-- name: install ripgrep
-  become: true
-  apt:
-    name: "ripgrep"
-  tags:
-    - install
-    - core
-
-- name: install alacritty
-  become: true
-  apt:
-    name: "alacritty"
-  tags:
-    - install
-    - core
