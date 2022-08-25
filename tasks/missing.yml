@@ -1,0 +1,16 @@
+xrandr --output DP-2 --rate 144 --mode 2560x1440 --primary
+xrandr --output DP-0 --rate 119.98 --mode 1920x1080
+rofi
+ansible
+tar
+monitor-setup.sh
+lightdm
+lightdm slick-greeter
+/ect/lightdm
+mount hdd
+awesome settings
+rofi settings
+firefox compact
+1password
+vlc - libmicrodns protobuf
+lsof - gridfan
