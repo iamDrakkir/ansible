@@ -2,7 +2,12 @@
   become: true
   apt: name=zsh
   tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
-    
+
+- name: create folders for history
+  shell: mkdir ~/.local/share/zsh
+- name: create history file
+  shell: touch ~/.local/share/zsh/.zhistory
+
 - name: Change shell to zsh
   become: true
   shell: chsh -s $(which zsh)
