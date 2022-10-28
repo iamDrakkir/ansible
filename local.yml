@@ -9,11 +9,8 @@
         force_apt_get: true
         update_cache: true
         state: present
-      tags:
-        - install
-        - core
   tasks:
-#    - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/git.yml
     - include_tasks: tasks/font.yml
     - include_tasks: tasks/core.yml
@@ -21,3 +18,4 @@
     - include_tasks: tasks/pop_os.yml
     - include_tasks: tasks/nvim.yml
     - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/1pass.yml

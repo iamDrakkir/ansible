@@ -9,6 +9,3 @@
     dest: /usr/share/fonts/JetBrainsMono/
     remote_src: yes
   become: true
-  tags:
-    - font
-

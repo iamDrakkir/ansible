@@ -2,15 +2,13 @@
   become: true
   package:
     name: python3-psutil
-  tags: 'pop_os'
-  
+
 - name: remove logout promt
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/gnome-session/logout-prompt' 
     value: 'false'
-  tags: 'pop_os'
 
 - name: remove app button
   become: true
@@ -18,15 +16,13 @@
   dconf:
     key: '/org/gnome/shell/extensions/pop-cosmic/show-applications-button' 
     value: 'false'
-  tags: 'pop_os'
-  
+
 - name: remove workspace button
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/shell/extensions/pop-cosmic/show-workspaces-button' 
     value: 'false'
-  tags: 'pop_os'
 
 - name: set no mouse acceleration
   become: true
@@ -34,7 +30,6 @@
   dconf:
     key: '/org/gnome/desktop/peripherals/mouse/accel-profile' 
     value: 'false'
-  tags: 'pop_os'
 
 - name: set 24h time format
   become: true
@@ -42,23 +37,20 @@
   dconf:
     key: '/org/gtk/settings/file-chooser/clock-format' 
     value: "'24h'"
-  tags: 'pop_os'
-  
+
 - name: set favorites
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/shell/favorite-apps' 
     value: "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
-  tags: 'pop_os'
-  
+
 - name: dont extend dock
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/shell/extensions/dash-to-dock/extend-height' 
     value: 'false'
-  tags: 'pop_os'
 
 - name: intellihide dock
   become: true
@@ -66,21 +58,18 @@
   dconf:
     key: '/org/gnome/shell/extensions/dash-to-dock/dock-fixed' 
     value: 'false'
-  tags: 'pop_os'  
-  
+
 - name: make sure intellihide
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/shell/extensions/dash-to-dock/intellihide' 
     value: 'true'
-  tags: 'pop_os'
-  
+
 - name: set icon size
   become: true
   become_user: drakkir
   dconf:
     key: '/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size' 
     value: "36"
-  tags: 'pop_os'  
 

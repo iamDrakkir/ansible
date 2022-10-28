@@ -3,33 +3,23 @@
     dest: ~/.config/git
     mode: 0700
     state: directory
-  tags:
-  - git
 - name: Ensure .config/git/config exists
   file:
     dest: ~/.config/git/config
     mode: u=rw,g=r,o=r
     state: touch
-  tags:
-  - git
 - name: Git personal setup email
   git_config:
     name: user.email
     scope: global
     value: "Hagelin.Rickard@gmail.com"
-  tags:
-  - git
 - name: Git personal setup name
   git_config:
     name: user.name
     scope: global
     value: "iamDrakkir"
-  tags:
-  - git
 - name: Git personal setup name
   git_config:
     name: core.editor
     scope: global
     value: nvim
-  tags:
-  - git
