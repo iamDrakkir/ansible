@@ -1,0 +1,15 @@
+- name: Cloning zmk-config
+  git:
+    repo: 'git@github.com:iamDrakkir/zmk-config.git'
+    dest: "{{ lookup('env', 'HOME') }}/git/zmk-config"
+    update: yes
+    accept_hostkey: yes
+    version: master
+
+- name: Cloning 
+  git:
+    repo: 'git@github.com:iamDrakkir/gridfan.git'
+    dest: "{{ lookup('env', 'HOME') }}/git/gridfan"
+    update: yes
+    accept_hostkey: yes
+    version: master
