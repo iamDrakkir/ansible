@@ -2,15 +2,9 @@
   become: true
   apt: name=zsh
 
-- name: create folders for history
-  file:
-    path: ~/.local/share/zsh/
-    state: directory
-    mode: '0755'
-
 - name: create history file
   file:
-    path: ~/.local/share/zsh/.zhistory
+    path: ~/.zhistory
     state: touch
     mode: u=rw,g=r,o=r
 
