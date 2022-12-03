@@ -2,6 +2,15 @@
   become: true
   apt: name=zsh
 
+- name: Download zsh-zap
+  get_url:
+    url: https://raw.githubusercontent.com/zap-zsh/zap/master/install.sh
+    dest: /tmp/install.sh
+
+- name: Install zsh-zap
+  command:
+    cmd: 'sh /tmp/install.sh'
+
 - name: create history file
   file:
     path: ~/.zhistory
