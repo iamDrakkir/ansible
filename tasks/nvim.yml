@@ -18,4 +18,4 @@
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
 
 - name: Install vim Plugins
-  shell: nvim --headless +'PlugInstall --sync' +'PlugUpdate' +qall 
+  shell: nvim --headless "+Lazy! sync" +qa
