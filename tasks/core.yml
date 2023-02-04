@@ -18,6 +18,15 @@
   apt:
     name: ["ripgrep", "exa", "bat", "fzf", "zoxide", "entr"]
 
+- name: Install System Packages 4 (fd-find)
+  become: true
+  apt:
+    name: ["fd-find"]
+
+- name: Change shell to zsh
+  shell: ln -s $(which fd-find) ~./local/bin/fd {{ lookup('env', 'USER') }}
+  become: true
+
 - name: install python (py3, pip)
   become: true
   apt:
