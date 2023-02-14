@@ -9,7 +9,7 @@
 
 - name: Install zsh-zap
   command:
-    cmd: 'sh /tmp/install.sh'
+    cmd: 'zsh /tmp/install.sh'
 
 - name: create history file
   file:
