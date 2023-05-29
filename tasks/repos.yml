@@ -4,7 +4,6 @@
     dest: "{{ lookup('env', 'HOME') }}/git/zmk-config"
     update: yes
     accept_hostkey: yes
-    version: master
 
 - name: Cloning 
   git:
@@ -12,4 +11,3 @@
     dest: "{{ lookup('env', 'HOME') }}/git/gridfan"
     update: yes
     accept_hostkey: yes
-    version: master

@@ -4,7 +4,7 @@
 
 - name: Download zsh-zap
   get_url:
-    url: https://raw.githubusercontent.com/zap-zsh/zap/master/install.sh
+    url: https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh
     dest: /tmp/install.sh
 
 - name: Install zsh-zap

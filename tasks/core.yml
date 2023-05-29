@@ -7,11 +7,11 @@
   become: true
   apt:
     name: [ "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
- 
+
 - name: Install System Packages 3 (alacritty, tmux)
   become: true
   apt:
-    name: ["alacritty", "tmux"] 
+    name: ["alacritty", "tmux"]
 
 - name: Install System Packages 4 (ripgrep, exa, bat, fzf, zoxide, entr)
   become: true
@@ -23,16 +23,19 @@
   apt:
     name: ["fd-find"]
 
-- name: Change shell to zsh
-  shell: ln -s $(which fd-find) ~./local/bin/fd {{ lookup('env', 'USER') }}
-  become: true
+- name: Creates directory
+  file:
+    path: ~/.local/bin/fd
+    state: directory
+
+- name: Link fd-find to fd
+  ansible.builtin.file:
+    src: $(which fdfind)
+    dest: ~/.local/bin/fd
+    state: link
+    force: true
 
 - name: install python (py3, pip)
   become: true
   apt:
     name: ["python3", "python3-pip"]
-
-- name: install vlc
-  become: true
-  apt:
-    name: "vlc"
