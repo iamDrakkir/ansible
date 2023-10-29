@@ -1,6 +1,15 @@
 - name: Installing stow
   become: true
-  apt: name=stow
+  block:
+    - name: Install stow on Debian/Ubuntu
+      apt:
+        name: stow
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install stow on Arch Linux
+      pacman:
+        name: stow
+      when: ansible_distribution == 'ArchLinux'
 
 - name: Cloning .dotfiles
   git:

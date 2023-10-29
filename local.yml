@@ -3,21 +3,31 @@
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
   pre_tasks:
-    - name: Update Apt
+    - name: Update package manager cache
       become: true
-      apt:
-        force_apt_get: true
-        update_cache: true
-        state: present
+      block:
+        - name: Update Apt (for Debian-based systems)
+          apt:
+            force_apt_get: true
+            update_cache: true
+            state: present
+          when: ansible_distribution in ['Debian', 'Ubuntu']
+
+        - name: Update package database (for Arch Linux)
+          pacman:
+            update_cache: yes
+          when: ansible_distribution == 'ArchLinux'
+      tags: update_cache
+
   tasks:
     - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/git.yml
     - include_tasks: tasks/font.yml
     - include_tasks: tasks/core.yml
     - include_tasks: tasks/zsh.yml
-    - include_tasks: tasks/pop_os.yml
+      #- include_tasks: tasks/pop_os.yml
     - include_tasks: tasks/dotfiles.yml
-    - include_tasks: tasks/1pass.yml
+      #- include_tasks: tasks/1pass.yml
     - include_tasks: tasks/repos.yml
-    - include_tasks: tasks/rust.yml
+      #- include_tasks: tasks/rust.yml
     - include_tasks: tasks/nvim.yml

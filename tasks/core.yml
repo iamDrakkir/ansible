@@ -1,41 +1,78 @@
 - name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
   become: true
-  apt:
-    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  block:
+    - name: Install on Debian/Ubuntu
+      apt:
+        name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install on Arch Linux
+      pacman:
+        name: ["base-devel", "cmake", "pkgconf"]
+      when: ansible_distribution == 'ArchLinux'
 
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
   become: true
-  apt:
-    name: [ "lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+  block:
+    - name: Install on Debian/Ubuntu
+      apt:
+        name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install on Arch Linux
+      pacman:
+        name: ["lua", "unzip", "libtool", "gettext"]
+      when: ansible_distribution == 'ArchLinux'
 
 - name: Install System Packages 3 (alacritty, tmux)
   become: true
-  apt:
-    name: ["alacritty", "tmux"]
+  block:
+    - name: Install on Debian/Ubuntu
+      apt:
+        name: ["alacritty", "tmux"]
+      when: ansible_distribution in ['Debian', 'Ubuntu']
 
-- name: Install System Packages 4 (ripgrep, exa, bat, fzf, zoxide, entr)
+    - name: Install on Arch Linux
+      pacman:
+        name: ["alacritty", "tmux"]
+      when: ansible_distribution == 'ArchLinux'
+
+- name: Install System Packages 4 (ripgrep, exa, bat, fzf, zoxide, entr, fd-find)
   become: true
-  apt:
-    name: ["ripgrep", "exa", "bat", "fzf", "zoxide", "entr"]
+  block:
+    - name: Install on Debian/Ubuntu
+      apt:
+        name: ["ripgrep", "exa", "bat", "fzf", "zoxide", "entr", "fd-find"]
+      when: ansible_distribution in ['Debian', 'Ubuntu']
 
-- name: Install System Packages 4 (fd-find)
-  become: true
-  apt:
-    name: ["fd-find"]
+    - name: Install on Arch Linux
+      pacman:
+        name: ["ripgrep", "exa", "bat", "fzf", "zoxide", "entr", "fd"]
+      when: ansible_distribution == 'ArchLinux'
 
-- name: Creates directory
+- name: Create directory for fd
   file:
-    path: ~/.local/bin/fd
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/fd"
     state: directory
+  when: ansible_distribution in ['Debian', 'Ubuntu']
 
 - name: Link fd-find to fd
   ansible.builtin.file:
-    src: $(which fdfind)
-    dest: ~/.local/bin/fd
+    src: "{{ lookup('which', 'fdfind') }}"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/fd"
     state: link
     force: true
+  when: ansible_distribution in ['Debian', 'Ubuntu']
 
-- name: install python (py3, pip)
+- name: Install Python (py3, pip)
   become: true
-  apt:
-    name: ["python3", "python3-pip"]
+  block:
+    - name: Install on Debian/Ubuntu
+      apt:
+        name: ["python3", "python3-pip"]
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install on Arch Linux
+      pacman:
+        name: ["python", "python-pip"]
+      when: ansible_distribution == 'ArchLinux'

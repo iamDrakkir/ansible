@@ -1,6 +1,15 @@
-- name: Install ZSH
+- name: Install ZSH and set it as the default shell
   become: true
-  apt: name=zsh
+  block:
+    - name: Install ZSH on Debian/Ubuntu
+      apt:
+        name: zsh
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install ZSH on Arch Linux
+      pacman:
+        name: zsh
+      when: ansible_distribution == 'ArchLinux'
 
 - name: Download zsh-zap
   get_url:
@@ -11,11 +20,11 @@
   command:
     cmd: 'zsh /tmp/install.sh'
 
-- name: create history file
+- name: Create history file
   file:
-    path: ~/.zsh_history
+    path: "{{ lookup('env', 'HOME') }}/.zsh_history"
     state: touch
-    mode: u=rw,g=r,o=r
+    mode: "u=rw,g=r,o=r"
 
 - name: Change shell to zsh
   shell: chsh -s $(which zsh) {{ lookup('env', 'USER') }}
